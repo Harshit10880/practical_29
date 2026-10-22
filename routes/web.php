@@ -8,14 +8,20 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Practical 16: Complete Web-Based CRUD Mini Project
+| Web Routes - Practical 29: Major Project - I (EduPulse Pro Coaching & Academy SaaS)
 |--------------------------------------------------------------------------
 */
 
-// Practical 8: Reusable Blade Template System (Home, About, Contact)
+// Practical 29: Full-Featured Commercial Tuition & Academic Management System
 Route::get('/', function () {
-    return view('home');
-});
+    return view('edupulse');
+})->name('edupulse.home');
+
+Route::get('/tuition', function () {
+    return view('edupulse');
+})->name('edupulse.dashboard');
+
+// Practical 8 & 16 Legacy Views & CRUD Modules
 Route::get('/home', function () {
     return view('home');
 })->name('home');
@@ -28,14 +34,7 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
     return back()->with('success', 'Thank you, ' . $request->input('name') . '! Your message was submitted successfully via @csrf.');
 })->name('contact.submit');
 
-// Practical 16: Dashboard Module
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-// 2-5. Student CRUD Modules (Index, Create/Store, Show, Edit/Update, Destroy)
 Route::resource('students', StudentController::class);
-
-// 6. Departments & Courses Module
 Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
-
-// 7. About & System Architecture Module
 Route::get('/about', [AboutController::class, 'index'])->name('about');
